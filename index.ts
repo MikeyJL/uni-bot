@@ -1,6 +1,5 @@
 require("dotenv").config();
 const { Client, Intents } = require("discord.js");
-const express = require("express");
 
 const { deployAPI } = require("./src/deploy-commands");
 const APIVersion = "1.0.0";

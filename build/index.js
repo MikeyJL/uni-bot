@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 require("dotenv").config();
 var _a = require("discord.js"), Client = _a.Client, Intents = _a.Intents;
-var express = require("express");
 var deployAPI = require("./src/deploy-commands").deployAPI;
 var APIVersion = "1.0.0";
 var client = new Client({ intents: [Intents.FLAGS.GUILDS] });
