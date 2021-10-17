@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 require("dotenv").config();
 var _a = require("discord.js"), Client = _a.Client, Intents = _a.Intents;
-var deployAPI = require("./src/deploy-commands").deployAPI;
+var _b = require("./src/deploy-commands"), APIVersion = _b.APIVersion, deployAPI = _b.deployAPI;
 deployAPI();
 var client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.once("ready", function () {
@@ -53,28 +53,23 @@ client.on("interactionCreate", function (interaction) { return __awaiter(void 0,
                 commandName = interaction.commandName;
                 _a = commandName;
                 switch (_a) {
-                    case "ping": return [3 /*break*/, 1];
-                    case "server": return [3 /*break*/, 3];
-                    case "user": return [3 /*break*/, 5];
-                    case "deploy": return [3 /*break*/, 7];
+                    case "wake": return [3 /*break*/, 1];
+                    case "help": return [3 /*break*/, 2];
+                    case "version": return [3 /*break*/, 4];
                 }
-                return [3 /*break*/, 8];
-            case 1: return [4 /*yield*/, interaction.reply("Pong")];
-            case 2:
+                return [3 /*break*/, 6];
+            case 1:
+                client.login(process.env.CLIENT_TOKEN);
+                return [3 /*break*/, 6];
+            case 2: return [4 /*yield*/, interaction.reply("Hi, I'm UniBot, please let Mikey (borgir) know if you have any ideas for improving me!\n\nList of commands: /help, /version")];
+            case 3:
                 _b.sent();
-                return [3 /*break*/, 8];
-            case 3: return [4 /*yield*/, interaction.reply("Server")];
-            case 4:
+                return [3 /*break*/, 6];
+            case 4: return [4 /*yield*/, interaction.reply("API@v" + APIVersion)];
+            case 5:
                 _b.sent();
-                return [3 /*break*/, 8];
-            case 5: return [4 /*yield*/, interaction.reply("User")];
-            case 6:
-                _b.sent();
-                return [3 /*break*/, 8];
-            case 7:
-                deployAPI();
-                return [3 /*break*/, 8];
-            case 8: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); });
