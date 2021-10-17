@@ -1,4 +1,5 @@
 require("dotenv").config();
+const request = require("request");
 const { Client, Intents } = require("discord.js");
 
 const { deployAPI } = require("./src/deploy-commands");
@@ -19,11 +20,30 @@ client.on("interactionCreate", async (interaction: any) => {
     switch (commandName) {
         case "help":
             await interaction.reply(
-                "Hi, I'm UniBot, please let Mikey (borgir) know if you have any ideas for improving me!\n\nList of commands: /help, /version"
+                "Hi, I'm UniBot, please let Mikey (borgir#5796) know if you have any ideas for improving me!\n\nList of commands: /help, /version, /addict"
             );
             break;
         case "version":
-            await interaction.reply(`API@v${APIVersion}`);
+            await interaction.reply(`API@${APIVersion}`);
+            break;
+        case "addict":
+            const request = require("request");
+            request(
+                "https://www.codewars.com/api/v1/users/hexolio",
+                { json: true },
+                (error: Error, response: Response, body: any) => {
+                    if (error) {
+                        return interaction(error.message);
+                    }
+                    const honor: number = body.honor;
+                    const skills: string[] = body.skills;
+                    interaction.reply(
+                        `Darius has ${honor} points and knows ${skills.join(
+                            ", "
+                        )}`
+                    );
+                }
+            );
             break;
     }
 });

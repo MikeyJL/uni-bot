@@ -10,6 +10,9 @@ var commands = [
     new SlashCommandBuilder()
         .setName("version")
         .setDescription("Displays the version of the API."),
+    new SlashCommandBuilder()
+        .setName("addict")
+        .setDescription("Find out what our local CodeWars addict Darius has been up to..."),
 ].map(function (command) { return command.toJSON(); });
 var deployAPI = function () {
     var rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN);

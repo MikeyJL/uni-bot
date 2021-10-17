@@ -8,6 +8,11 @@ const commands = [
     new SlashCommandBuilder()
         .setName("version")
         .setDescription("Displays the version of the API."),
+    new SlashCommandBuilder()
+        .setName("addict")
+        .setDescription(
+            "Find out what our local CodeWars addict Darius has been up to..."
+        ),
 ].map((command) => command.toJSON());
 
 export const deployAPI = () => {

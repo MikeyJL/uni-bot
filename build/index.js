@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 require("dotenv").config();
+var request = require("request");
 var _a = require("discord.js"), Client = _a.Client, Intents = _a.Intents;
 var deployAPI = require("./src/deploy-commands").deployAPI;
 var APIVersion = "1.0.0";
@@ -45,7 +46,7 @@ client.once("ready", function () {
     console.log("Ready!");
 });
 client.on("interactionCreate", function (interaction) { return __awaiter(void 0, void 0, void 0, function () {
-    var commandName, _a;
+    var commandName, _a, request_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -56,17 +57,29 @@ client.on("interactionCreate", function (interaction) { return __awaiter(void 0,
                 switch (_a) {
                     case "help": return [3 /*break*/, 1];
                     case "version": return [3 /*break*/, 3];
+                    case "addict": return [3 /*break*/, 5];
                 }
-                return [3 /*break*/, 5];
-            case 1: return [4 /*yield*/, interaction.reply("Hi, I'm UniBot, please let Mikey (borgir) know if you have any ideas for improving me!\n\nList of commands: /help, /version")];
+                return [3 /*break*/, 6];
+            case 1: return [4 /*yield*/, interaction.reply("Hi, I'm UniBot, please let Mikey (borgir#5796) know if you have any ideas for improving me!\n\nList of commands: /help, /version, /addict")];
             case 2:
                 _b.sent();
-                return [3 /*break*/, 5];
-            case 3: return [4 /*yield*/, interaction.reply("API@v" + APIVersion)];
+                return [3 /*break*/, 6];
+            case 3: return [4 /*yield*/, interaction.reply("API@" + APIVersion)];
             case 4:
                 _b.sent();
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 5:
+                request_1 = require("request");
+                request_1("https://www.codewars.com/api/v1/users/hexolio", { json: true }, function (error, response, body) {
+                    if (error) {
+                        return interaction(error.message);
+                    }
+                    var honor = body.honor;
+                    var skills = body.skills;
+                    interaction.reply("Darius has " + honor + " points and knows " + skills.join(", "));
+                });
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); });
