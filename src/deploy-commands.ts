@@ -4,6 +4,9 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 
 const commands = [
+    new SlashCommandBuilder()
+        .setName("wake")
+        .setDescription("Summon the all mighty UniBot..."),
     new SlashCommandBuilder().setName("help").setDescription("Need help?"),
     new SlashCommandBuilder()
         .setName("version")
