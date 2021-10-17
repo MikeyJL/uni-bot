@@ -15,18 +15,13 @@ client.on("interactionCreate", async (interaction: any) => {
     const { commandName } = interaction;
 
     switch (commandName) {
-        case "ping":
-            await interaction.reply("Pong");
+        case "help":
+            await interaction.reply(
+                "Hi, I'm UniBot, please let Mikey (borgir) know if you have any ideas for improving me!\n\nList of commands: /help, /version"
+            );
             break;
-        case "server":
-            await interaction.reply("Server");
-            break;
-        case "user":
-            await interaction.reply("User");
-            break;
-        case "deploy":
-            deployAPI();
-            await interaction.reply(`Deployed API@v${APIVersion}`);
+        case "version":
+            await interaction.reply(`API@v${APIVersion}`);
             break;
     }
 });
