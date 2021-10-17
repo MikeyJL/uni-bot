@@ -35,8 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
-var request = require("request");
+var axios = require("axios");
 var _a = require("discord.js"), Client = _a.Client, Intents = _a.Intents;
 var deployAPI = require("./src/deploy-commands").deployAPI;
 var APIVersion = "1.0.0";
@@ -46,7 +47,7 @@ client.once("ready", function () {
     console.log("Ready!");
 });
 client.on("interactionCreate", function (interaction) { return __awaiter(void 0, void 0, void 0, function () {
-    var commandName, _a, request_1;
+    var commandName, _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -69,14 +70,15 @@ client.on("interactionCreate", function (interaction) { return __awaiter(void 0,
                 _b.sent();
                 return [3 /*break*/, 6];
             case 5:
-                request_1 = require("request");
-                request_1("https://www.codewars.com/api/v1/users/hexolio", { json: true }, function (error, response, body) {
-                    if (error) {
-                        return interaction(error.message);
-                    }
-                    var honor = body.honor;
-                    var skills = body.skills;
-                    interaction.reply("Darius has " + honor + " points and knows " + skills.join(", "));
+                axios
+                    .get("https://www.codewars.com/api/v1/users/hexolio")
+                    .then(function (response) {
+                    var honor = response.data.honor;
+                    var skills = response.data.skills;
+                    interaction.reply("Darius has " + honor + " points on Codewars.");
+                })
+                    .catch(function (error) {
+                    interaction.reply("Something went wrong\n" + error.name + "\n" + error.message);
                 });
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];

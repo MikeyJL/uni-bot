@@ -1,5 +1,8 @@
+import { AxiosResponse, ResponseType } from "axios";
+import { ICodewars } from "./types";
+
 require("dotenv").config();
-const request = require("request");
+const axios = require("axios");
 const { Client, Intents } = require("discord.js");
 
 const { deployAPI } = require("./src/deploy-commands");
@@ -27,23 +30,20 @@ client.on("interactionCreate", async (interaction: any) => {
             await interaction.reply(`API@${APIVersion}`);
             break;
         case "addict":
-            const request = require("request");
-            request(
-                "https://www.codewars.com/api/v1/users/hexolio",
-                { json: true },
-                (error: Error, response: Response, body: any) => {
-                    if (error) {
-                        return interaction(error.message);
-                    }
-                    const honor: number = body.honor;
-                    const skills: string[] = body.skills;
+            axios
+                .get("https://www.codewars.com/api/v1/users/hexolio")
+                .then((response: AxiosResponse<ICodewars>) => {
+                    const honor: number = response.data.honor;
+                    const skills: string[] = response.data.skills;
                     interaction.reply(
-                        `Darius has ${honor} points and knows ${skills.join(
-                            ", "
-                        )}`
+                        `Darius has ${honor} points on Codewars.`
                     );
-                }
-            );
+                })
+                .catch((error: Error) => {
+                    interaction.reply(
+                        `Something went wrong\n${error.name}\n${error.message}`
+                    );
+                });
             break;
     }
 });
