@@ -4,16 +4,12 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 
 const commands = [
-    new SlashCommandBuilder()
-        .setName("wake")
-        .setDescription("Summon the all mighty UniBot..."),
     new SlashCommandBuilder().setName("help").setDescription("Need help?"),
     new SlashCommandBuilder()
         .setName("version")
         .setDescription("Displays the version of the API."),
 ].map((command) => command.toJSON());
 
-export const APIVersion = "1.0.0";
 export const deployAPI = () => {
     const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN);
     rest.put(

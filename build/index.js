@@ -37,9 +37,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 require("dotenv").config();
 var _a = require("discord.js"), Client = _a.Client, Intents = _a.Intents;
-var _b = require("./src/deploy-commands"), APIVersion = _b.APIVersion, deployAPI = _b.deployAPI;
-deployAPI();
+var express = require("express");
+var deployAPI = require("./src/deploy-commands").deployAPI;
+var APIVersion = "1.0.0";
 var client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+deployAPI();
 client.once("ready", function () {
     console.log("Ready!");
 });
@@ -53,23 +55,19 @@ client.on("interactionCreate", function (interaction) { return __awaiter(void 0,
                 commandName = interaction.commandName;
                 _a = commandName;
                 switch (_a) {
-                    case "wake": return [3 /*break*/, 1];
-                    case "help": return [3 /*break*/, 2];
-                    case "version": return [3 /*break*/, 4];
+                    case "help": return [3 /*break*/, 1];
+                    case "version": return [3 /*break*/, 3];
                 }
-                return [3 /*break*/, 6];
-            case 1:
-                client.login(process.env.CLIENT_TOKEN);
-                return [3 /*break*/, 6];
-            case 2: return [4 /*yield*/, interaction.reply("Hi, I'm UniBot, please let Mikey (borgir) know if you have any ideas for improving me!\n\nList of commands: /help, /version")];
-            case 3:
+                return [3 /*break*/, 5];
+            case 1: return [4 /*yield*/, interaction.reply("Hi, I'm UniBot, please let Mikey (borgir) know if you have any ideas for improving me!\n\nList of commands: /help, /version")];
+            case 2:
                 _b.sent();
-                return [3 /*break*/, 6];
-            case 4: return [4 /*yield*/, interaction.reply("API@v" + APIVersion)];
-            case 5:
+                return [3 /*break*/, 5];
+            case 3: return [4 /*yield*/, interaction.reply("API@v" + APIVersion)];
+            case 4:
                 _b.sent();
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); });
